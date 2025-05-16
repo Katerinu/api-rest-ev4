@@ -1,0 +1,187 @@
+{
+	"info": {
+		"_postman_id": "f4108592-9241-40ef-8683-51b75becfcd5",
+		"name": "Evaluacion Sumativa 4",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41341769"
+	},
+	"item": [
+		{
+			"name": "Leer Productos Paginados",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRlIjoiMjAyNS0wNS0xNVQyMTo1Mzo1OSIsImlhdCI6MTc0NzM2MDQzOSwiZXhwIjoxNzUyNTQ0NDM5LCJhdWQiOiJLQVQtRVY0LUNMSUVOVCIsImlzcyI6IktBVC1FVjQtQVBJIiwianRpIjoiSldULTAwMSJ9.ez9HE2QzxFY6Guz4ANkuTSKz_5f8pOhlczhmqcQQnVM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/products?page=2&limit=50",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"products"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						},
+						{
+							"key": "limit",
+							"value": "50"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Leer Producto",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRlIjoiMjAyNS0wNS0xNVQyMTo1Mzo1OSIsImlhdCI6MTc0NzM2MDQzOSwiZXhwIjoxNzUyNTQ0NDM5LCJhdWQiOiJLQVQtRVY0LUNMSUVOVCIsImlzcyI6IktBVC1FVjQtQVBJIiwianRpIjoiSldULTAwMSJ9.ez9HE2QzxFY6Guz4ANkuTSKz_5f8pOhlczhmqcQQnVM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/products/SKU-0001",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"products",
+						"SKU-0001"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear Producto",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRlIjoiMjAyNS0wNS0xNVQyMTo1Mzo1OSIsImlhdCI6MTc0NzM2MDQzOSwiZXhwIjoxNzUyNTQ0NDM5LCJhdWQiOiJLQVQtRVY0LUNMSUVOVCIsImlzcyI6IktBVC1FVjQtQVBJIiwianRpIjoiSldULTAwMSJ9.ez9HE2QzxFY6Guz4ANkuTSKz_5f8pOhlczhmqcQQnVM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"product test name\",\r\n    \"sku\": \"aaaa-aaaa-bbbb-bbbb-cccc-cccc\",\r\n    \"price\": 3,\r\n    \"stock\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/products/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"products",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar Producto",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRlIjoiMjAyNS0wNS0xNVQyMTo1Mzo1OSIsImlhdCI6MTc0NzM2MDQzOSwiZXhwIjoxNzUyNTQ0NDM5LCJhdWQiOiJLQVQtRVY0LUNMSUVOVCIsImlzcyI6IktBVC1FVjQtQVBJIiwianRpIjoiSldULTAwMSJ9.ez9HE2QzxFY6Guz4ANkuTSKz_5f8pOhlczhmqcQQnVM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"new_name\": \"NEW NAME\",\r\n    \"new_price\": 3,\r\n    \"new_stock\": 4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/products/SKU-0001",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"products",
+						"SKU-0001"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar producto (Cambio de estado)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRlIjoiMjAyNS0wNS0xNVQyMTo1Mzo1OSIsImlhdCI6MTc0NzM2MDQzOSwiZXhwIjoxNzUyNTQ0NDM5LCJhdWQiOiJLQVQtRVY0LUNMSUVOVCIsImlzcyI6IktBVC1FVjQtQVBJIiwianRpIjoiSldULTAwMSJ9.ez9HE2QzxFY6Guz4ANkuTSKz_5f8pOhlczhmqcQQnVM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/products/SKU-0001",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"products",
+						"SKU-0001"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
