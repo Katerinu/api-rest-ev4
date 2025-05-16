@@ -22,12 +22,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/products?page=2&limit=50",
-					"protocol": "http",
+					"raw": "https://api-rest-ev4.onrender.com/products?page=2&limit=50",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"api-rest-ev4",
+						"onrender",
+						"com"
 					],
-					"port": "3000",
 					"path": [
 						"products"
 					],
@@ -61,12 +62,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/products/SKU-0001",
-					"protocol": "http",
+					"raw": "https://api-rest-ev4.onrender.com/products/SKU-0001",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"api-rest-ev4",
+						"onrender",
+						"com"
 					],
-					"port": "3000",
 					"path": [
 						"products",
 						"SKU-0001"
@@ -100,12 +102,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/products/",
-					"protocol": "http",
+					"raw": "https://api-rest-ev4.onrender.com/products/",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"api-rest-ev4",
+						"onrender",
+						"com"
 					],
-					"port": "3000",
 					"path": [
 						"products",
 						""
@@ -139,12 +142,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/products/SKU-0001",
-					"protocol": "http",
+					"raw": "https://api-rest-ev4.onrender.com/products/SKU-0001",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"api-rest-ev4",
+						"onrender",
+						"com"
 					],
-					"port": "3000",
 					"path": [
 						"products",
 						"SKU-0001"
@@ -169,12 +173,13 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/products/SKU-0001",
-					"protocol": "http",
+					"raw": "https://api-rest-ev4.onrender.com/products/SKU-0001",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"api-rest-ev4",
+						"onrender",
+						"com"
 					],
-					"port": "3000",
 					"path": [
 						"products",
 						"SKU-0001"
