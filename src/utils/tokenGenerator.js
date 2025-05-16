@@ -3,9 +3,9 @@ import jwt from "jsonwebtoken";
 
 dotenv.config();
 
-export const generateTokenJWT = (user) => {
+export const generateTokenJWT = (date) => {
     // Convertir cualquier BigInt a String antes de firmar el token
-    const userData = JSON.parse(JSON.stringify(user, (key, value) => {
+    const dateToken = JSON.parse(JSON.stringify(date, (key, value) => {
         if (typeof value === 'bigint') {
             return value.toString(); // Convertir BigInt a String
         }
@@ -13,7 +13,7 @@ export const generateTokenJWT = (user) => {
     }));
 
     const token = jwt.sign(
-        { user: userData },
+        { date: dateToken },
         process.env.JWT_SECRET,
         {
             expiresIn: '60d',

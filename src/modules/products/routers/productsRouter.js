@@ -7,7 +7,7 @@ productsRouter.get("/check", productsCheck);
 productsRouter.get("/createToken", createToken);
 productsRouter.get("/:sku", getProductBySKU);
 productsRouter.get("/", getPaginatedProducts);
-productsRouter.post("/createProduct", createProduct);
+productsRouter.post("/", createProduct);
 productsRouter.patch("/:sku", updateProduct);
 productsRouter.delete("/:sku", deleteProduct);
 

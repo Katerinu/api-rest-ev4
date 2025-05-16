@@ -9,14 +9,28 @@ const productsCheck = (req, res) => {
 
 //ENDPOINT UTILIZADO PARA CREAR TOKENS DE ACCESO A LA API PARA LA EVALUACION.
 const createToken = (req, res) => {
-    const token = generateTokenJWT(searched_user);
-    return res.status(200).json({ message: "Token creado correctamente", token });
+    const date = dayjs().format("YYYY-MM-DDTHH:mm:ss");
+    const token = generateTokenJWT(date);
+    return res.status(200).json({ message: "Token creado correctamente", token: token });
 }
 
 const createProduct = async (req, res) => {
     const { name, sku, price, stock } = req.body;
     if(!name || !sku || !price || !stock) {
         return res.status(400).json({ message: "Faltan datos para crear el producto" });
+    }
+
+    if (typeof name !== "string") {
+        return res.status(400).json({ message: "El nombre proporcionado no es válido" });
+    }
+    if (typeof sku !== "string") {
+        return res.status(400).json({ message: "El SKU proporcionado no es válido" });
+    }
+    if (typeof price !== "number") {
+        return res.status(400).json({ message: "El precio proporcionado no es válido" });
+    }
+    if (typeof stock !== "number") {
+        return res.status(400).json({ message: "El stock proporcionado no es válido" });
     }
 
     const token = req.headers.authorization;
@@ -58,11 +72,20 @@ const createProduct = async (req, res) => {
         updatedAt: dayjs().format("YYYY-MM-DDTHH:mm:ss"),
     };
 
-    const createdProduct = await createDocument("PRODUCTS", newProduct);
+    const createdProduct = await createDocument(newProduct, "PRODUCTS");
     if (!createdProduct) {
         return res.status(500).json({ message: "Error al crear el producto" });
     }
-    return res.status(201).json({ message: "Producto creado correctamente", product: createdProduct });
+    const reponseProduct = {
+        uuid: newProduct.uuid,
+        name: newProduct.name,
+        sku: newProduct.sku,
+        price: newProduct.price,
+        stock: newProduct.stock,
+        createdAt: newProduct.createdAt,
+        updatedAt: newProduct.updatedAt,
+    };
+    return res.status(201).json({ message: "Producto creado correctamente", product: reponseProduct });
 
 }
 
@@ -112,13 +135,21 @@ const getPaginatedProducts = async (req, res) => {
 
     const products = await getCollection("PRODUCTS");
 
+    let limitNumber = limit;
+    let pageNumber = page;
+    if(limitNumber > products.length) {
+        limitNumber = products.length;
+        pageNumber = 1;
+    }
+
     if (!products) {
         return res.status(500).json({ message: "Error al obtener los productos" });
     }
 
+
     const filteredProducts = products.filter(product => product.status === true);
-    const startIndex = (page - 1) * limit;
-    const endIndex = startIndex + limit;
+    const startIndex = (pageNumber - 1) * limitNumber;
+    const endIndex = startIndex + limitNumber;
     const paginatedProducts = filteredProducts.slice(startIndex, endIndex).map(product => ({
         name: product.name,
         sku: product.sku,
@@ -160,19 +191,31 @@ const updateProduct = async (req, res) => {
     let price = searched_product.price;
     let stock = searched_product.stock;
 
+    const { new_name, new_price, new_stock } = req.body;
+
     if (new_name) {
+        if (typeof new_name !== "string") {
+            return res.status(400).json({ message: "El nombre proporcionado no es válido" });
+        }
         if (new_name.length > 50) {
             return res.status(400).json({ message: "El nombre del producto no puede tener más de 50 caracteres" });
         }
         name = new_name;
     }
     if(new_price) {
+        if (typeof new_price !== "number") {
+            return res.status(400).json({ message: "El precio proporcionado no es válido" });
+        }
+
         if (new_price <= 0) {
             return res.status(400).json({ message: "El precio del producto no puede ser menor a 0" });
         }
         price = new_price;
     }
     if(new_stock) {
+        if (typeof new_stock !== "number") {
+            return res.status(400).json({ message: "El stock proporcionado no es válido" });
+        }
         if (new_stock < 0) {
             return res.status(400).json({ message: "El stock del producto no puede ser menor a 0" });
         }
@@ -180,7 +223,7 @@ const updateProduct = async (req, res) => {
     }
 
     const date = dayjs().format("YYYY-MM-DDTHH:mm:ss");
-    const updatedProduct = await updateDocument("PRODUCTS", { sku: sku }, { name: name, price: price, stock: stock, updatedAt: date });
+    const updatedProduct = await updateDocument({ name: name, price: price, stock: stock, updatedAt: date }, "PRODUCTS", { sku: sku });
     if (!updatedProduct) {
         return res.status(500).json({ message: "Error al actualizar el producto" });
     }
@@ -208,7 +251,7 @@ const deleteProduct = async (req, res) => {
         return res.status(400).json({ message: "El producto no está disponible" });
     }
     const date = dayjs().format("YYYY-MM-DDTHH:mm:ss");
-    const deletedProduct = await updateDocument("PRODUCTS", { sku: sku }, { status: false, updatedAt: date });
+    const deletedProduct = await updateDocument({ status: false, updatedAt: date }, "PRODUCTS", { sku: sku });
     if (!deletedProduct) {
         return res.status(500).json({ message: "Error al eliminar el producto" });
     }

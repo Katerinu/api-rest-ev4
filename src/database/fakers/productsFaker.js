@@ -5,7 +5,7 @@ import dayjs from "dayjs";
 const generateFakeProduct = () => {
     const name = faker.commerce.productName();
     const sku = faker.string.uuid();
-    const price = faker.commerce.price(1, 1000, 2);
+    const price = parseInt(faker.commerce.price(1, 1000));
     const stock = faker.number.int({ min: 0, max: 1000 });
 
     const newProduct = {
