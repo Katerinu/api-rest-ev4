@@ -13,7 +13,7 @@ const seedProducts = async () => {
         return;
     }
 
-    if(products.length <= 50){
+    if(products.length < 50){
         console.log("INSERTANDO PRIMER PRODUCTO DE PRUEBA");
         const firstProduct = {
             uuid: "0000-0000-0000-0000-0001",
